@@ -29,6 +29,9 @@
         }
         ?>
     </form>
+    <form action="general.php">
+        <button>Go</button>
+    </form> <br>
     <form action="./index.php">
         <button type="submit" style="background: red; color:white; border-color:red;">Exit</button>
     </form>
