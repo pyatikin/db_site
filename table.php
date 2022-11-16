@@ -1,10 +1,13 @@
 <?php
     require_once 'connect.php';
     session_start();
-    if($_SESSION['table'])
-        $_POST['button'] = $_SESSION['table'];
-    $name = $_POST['button'];
-    $_SESSION['table'] = NULL;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if($_SESSION['table'] )
+            $_POST['button'] = $_SESSION['table'];
+        $name = $_POST['button'];
+    }
+    else
+        $name = $_SESSION['table'];
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +26,9 @@
     td {
         background: #ccc;
     }
+    a {
+        color: black;
+    }
 </style>
 <body>
     <form action="./main.php">
@@ -30,7 +36,13 @@
     </form>
     <table>
         <?php
-            $query = "SELECT * FROM $name";
+            $sort_name = $_SESSION['sort_name'];
+            if ($_SESSION['sort_var'] == 1)
+                $query = "SELECT * FROM $name ORDER BY $sort_name ASC";
+            else if ($_SESSION['sort_var'] == 2)
+                $query = "SELECT * FROM $name ORDER BY $sort_name DESC";
+            else
+                $query = "SELECT * FROM $name";
             $tr = mysqli_query($connect, $query);
             $tr = mysqli_fetch_assoc($tr);
             $keys = array_keys($tr);
@@ -41,7 +53,7 @@
 
             foreach($keys as $key) {
                 ?>
-                <th><?=$key?></th>
+                <th><a href="./sort.php?name=<?=$key?>&table=<?=$name?>"><?=$key?></a></th>
                 <?php
             }
             foreach ($result as $res) {

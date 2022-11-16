@@ -7,6 +7,8 @@
 <body>
     <?
     session_start();
+    $_SESSION['sort_var'] = 0;
+    $_SESSION['sort_name'] = NULL;
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['login']=$_POST['login'];
         $_SESSION['password'] = $_POST['password'];
