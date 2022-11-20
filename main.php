@@ -9,6 +9,8 @@
     session_start();
     $_SESSION['sort_var'] = 0;
     $_SESSION['sort_name'] = NULL;
+    $_SESSION['select'] = $_SESSION['from'] = $_SESSION['join'] = $_SESSION['on'] = $_SESSION['where'] = $_SESSION['query'] = NULL;
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['login']=$_POST['login'];
         $_SESSION['password'] = $_POST['password'];
@@ -32,7 +34,7 @@
         ?>
     </form>
     <form action="general.php">
-        <button>Go</button>
+        <button>General</button>
     </form> <br>
     <form action="./index.php">
         <button type="submit" style="background: red; color:white; border-color:red;">Exit</button>
