@@ -28,11 +28,6 @@
     session_start();
     require_once "../connect.php";
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // $_SESSION['select'] = $_POST['select'];
-    // $_SESSION['from'] = $_POST['from'];
-    // $_SESSION['join'] = $_POST['join'];
-    // $_SESSION['on'] = $_POST['on'];
-    // $_SESSION['where'] = $_POST['where'];
     $query = $_POST;
     if (($_POST['join'] == '' || $_POST['on'] == '') && $_POST['where'] == '')
         $query = 'SELECT ' . $_POST['select'] . ' FROM ' . $_POST['from'] . ';';

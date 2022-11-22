@@ -7,7 +7,7 @@
     <?
         session_reset();
     ?>
-    <form action="./main.php" method="POST">
+    <form action="./main.php" method="">
         <p>Login</p>
         <input type="text" name="login">
         <p>Password</p>
