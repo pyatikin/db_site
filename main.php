@@ -16,23 +16,36 @@
             xmlhttp.send();
     }
     </script>
-    <style>
+<style>
     th, td {
         padding: auto;
     }
     th {
-        background: #606060;
+        background: #569cbc;
         color: #fff;
     }
     td {
-        background: #ccc;
+        background: #84b7ce;
     }
     a {
+        background: #569cbc;
         color: black;
+    }
+    body {
+        height: 771px;
+        background: linear-gradient(45deg, #C5DDE8, #e8d0c5);
+    }
+    button {
+        width: max-content;
+        height: 30px;
+        background:#cbe8c5; 
+        border: 2px solid;
+        border-radius: 10px; 
+        margin-bottom:10px;
     }
 </style>
 <body>
-    <div style="width: 300px; float: left;">
+    <div style="width: 300px; float: left; height:auto;">
         <?
         session_start();
         $_SESSION['sort_var'] = 0;
@@ -56,7 +69,7 @@
             foreach($tables as $table) {
                 ?>
                 <p>
-                <button type="submit" name="button" value="<?=$table[0]?>"><?=$table[0]?></button>
+                <button type="submit" name="button"  value="<?=$table[0]?>"><?=$table[0]?></button>
                 </p>
                 <?
             }
@@ -67,18 +80,18 @@
         </form><br>
          <br>
         <form action="./index.php">
-            <button type="submit" style="background: red; color:white; border-color:red;">Exit</button>
+            <button type="submit" style="background: red; color:white; border: 3px solid red; border-radius: 10px;">Exit</button>
         </form>
     </div>
-    <div style="width: 300px; float:left;">
+    <div style="width: 300px; float:left; height:auto;">
     <p>Search</p>
         <div style="width: 200px;
                     height: 200px; 
-                    background:#ccc; 
-                    outline: 2px solid #000;
+                    background:#84b7ce; 
+                    outline: 3px solid #000;
                     border: 3px solid #fff;
                     border-radius: 10px;">
-            <form action="./main.php" method="POST">
+            <form action="./main.php" method="POST" style="margin-left: 5px;">
                 <p style="margin-bottom: 1px;">Table</p>
                 <select name="select" id="select">
                     <?
@@ -93,15 +106,15 @@
                 <p style="margin-bottom: 1px;">What`s searching?</p>
                 <input type="text" name="search" 
                     <?if(isset($_POST['search'])){?>
-                        value=<?=$_POST['search']?><?} else {?>value="Мосвка" <?
+                        value=<?=$_POST['search']?><?} else {?>value="Москва" <?
                         }?>>
                     </input> <br> <br>
                 <button type="submit">Search</button>
             </form>
         </div>
     </div>
-   <div>
-    <table>
+   <div style="float:left; height:auto;">
+    <table><br>
        <?
              if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $selected = $_POST['select'];
@@ -122,11 +135,15 @@
                 if ($result != NULL){
                     $len = count($result);
                     $len_inside = count($result[0]);
-
+                    $len = count($keys) - 1;
+                    
                     foreach($keys as $key) {
+                       //print_r($len);
                         ?>
-                        <th><a href="./sort.php?name=<?=$key?>&table=<?=$name?>"><?=$key?></a></th>
-                        <?php
+                        <th><a 
+                        href="./sort.php?name=<?=$key?>&table=<?=$name?>"><?=$key?></a></th>
+                        <?
+                        $len--;
                     }
                     foreach ($result as $res) {
                         ?>
