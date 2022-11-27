@@ -52,10 +52,10 @@
         $_SESSION['sort_name'] = NULL;
         $_SESSION['query'] = NULL;
         
-        // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        //     $_SESSION['login']=$_POST['login'];
-        //     $_SESSION['password'] = $_POST['password'];
-        // }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['select'])) {
+             $_SESSION['login']=$_POST['login'];
+             $_SESSION['password'] = $_POST['password'];
+         }
         //print_r($_SESSION);
         require_once "./connect.php";
         $_SESSION['table'] = NULL;
@@ -116,7 +116,7 @@
    <div style="float:left; height:auto;">
     <table><br>
        <?
-             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['select'])) {
                 $selected = $_POST['select'];
                 $query = "SELECT * FROM $selected";
                 $tr = mysqli_query($connect, $query);
